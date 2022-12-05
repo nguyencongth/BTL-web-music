@@ -1,0 +1,144 @@
+
+html{
+    /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+#main {
+
+}
+
+/* Header */
+
+#banner{
+    width: 100%;
+    background: rgb(43, 40, 40);
+    height: 380px;
+    margin-top: 40px;
+    display: flex;
+    padding: 0px 133px;
+    position: relative;
+}
+
+#banner .box-left{
+    width: 50%;
+
+}
+#banner .box-left h2{
+    font-size: 21px;
+    margin-top: 150px;
+    color: #fff;
+}
+#banner .box-left h3{
+    font-size: 17px;
+    margin-top: 10px;
+    color: #fff;
+}
+#banner .box-left p{
+    font-size: 15px;
+    margin-top: 8px;
+    color: #fff;
+}
+#banner .box-left button{
+    width: 195px;
+    height: 40px;
+    margin-top: 35px;
+    background: green;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: 0.4s;
+}
+#banner .box-left button:hover{
+    background: orange;
+}
+#banner .box-left button a{
+    color: white;
+}
+
+#wp-products{
+    padding-top: 55px;
+    padding-bottom: 78px;
+    padding-left: 134px;
+    padding-right: 134px;
+}
+
+#wp-products h2{
+    text-align: center;
+    margin-bottom: 55px;
+    font-size: 27px;
+    color: #000;
+}
+
+#list-products{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#list-products .item{
+    /* width: 345px;
+    height: 350px; */
+    width: 370px;
+    background: rgb(240, 230, 230);
+    border-radius: 10px;
+    /* margin-bottom: 50px; */
+}
+
+#list-products .item .name{
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+    margin-top: 16px;
+    font-size: 24px;
+}
+
+#list-products .item .price{
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+#list-products .item .desc{
+    margin-left: 50px;
+    margin-top: 48px;
+}
+#list-products .item .desc ul {
+    list-style: none;
+}
+#list-products .item .desc ul li::before {
+    content: "\2022";
+    color: green;
+    font-weight: bold;
+    display: inline-block; 
+}
+
+#list-products .item .desc li{
+    margin-top: 30px;
+}
+
+#list-products .item button{
+    color: #fff;
+    width: 195px;
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 16px;
+    margin-left: 75px;
+    background: green;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: 0.4s;  
+}
+
+#list-products .item button:hover{
+    background: orange;
+}
+
+#list-products .item button a{
+    color: white;
+}
+

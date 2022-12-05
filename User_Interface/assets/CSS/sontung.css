@@ -1,0 +1,123 @@
+
+/* Banner */
+
+#banner {
+    background-color: #1c2934 ;
+    margin-top: 85px;
+    height: 380px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.banner-content {
+    width: 50%;
+    color: #fff;
+    text-align: justify;
+}
+.banner-content .banner-title{
+    text-transform: uppercase;
+    font-size: 28px;
+    padding-bottom: 16px;
+}
+
+.banner-content .banner-desc{
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.banner-img{
+    width: 300px;
+    height: 300px;
+}
+.banner-img img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+/* Music list */
+p {
+    margin: 0;
+}
+.musicList {
+    background-color: #171e24  ;
+    height: 700px;
+    color: #fff;
+}
+
+.play {
+    display: flex;
+    align-items: center;
+    padding: 24px 32px;
+}
+.play span {
+    font-size: 45px;
+    color: rgb(5, 165, 67);
+    display: flex;
+    margin-right: 24px;
+}
+.play span:hover {
+    /* animation: spinner 0.5s linear; */
+    transform: scale(1.1);
+}
+@keyframes spinner {
+    to {
+        transform: scale(1.2);
+    }
+}
+.play button {
+    padding: 6px 12px;
+    color: #fff;
+    background-color: #354e62;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.play button:hover {
+    border:1px solid #fff;
+}
+.musicList-box {
+    padding: 0 32px;
+}
+.musicList-title p{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.musicList-popular .singer {
+    opacity: 0.5;
+    font-size: 14px;
+}
+.musicList-popular {
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    height: 56px;
+}
+.musicList-popular.active {
+    background-color: #ffe67c;
+    border-radius: 4px;
+
+}
+.musicList-popular:active {
+    opacity: 0.8;
+}
+.musicList-popular:hover {
+    background-color: #515151;
+    border-radius: 4px;
+}
+
+.musicList-popular-img img{
+    display: flex;
+    width: 45px;
+    height: 45px;
+    margin-right: 10px;
+}
+
+
+.active {
+    color: green;
+}
+
+/* Footer */
+#footer {
+
+}

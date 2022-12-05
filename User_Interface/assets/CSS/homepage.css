@@ -1,0 +1,162 @@
+
+/* Section */
+#section {
+    height: 1000px;
+    background-color: #333333;
+}
+
+.singer-list {
+    margin-top: 32px;
+    padding-top: 100px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.singer-item {
+    position: relative;
+    
+}
+.singer-img {
+   width: 200px;
+   height: 200px;
+   border-radius: 10px;
+   transition: opacity ease 0.3s;
+}
+
+.singer-img:hover {
+    opacity: 0.6;
+}
+
+.singer__img{
+    position: relative;
+}
+
+.singer-content {
+    position: absolute;
+    margin-top: -20%;
+    margin-left: 10%;
+    color: #fff;
+    
+}
+
+.singer-item .play {
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    font-size: 45px;
+    color: rgb(5, 165, 67);
+    display: none;
+}
+
+
+.singer-item:hover .play {
+    display: inline-block;
+    animation: move 0.3s linear forwards;
+}
+
+@keyframes move {
+    to{
+        bottom: 10px;
+    }
+}
+
+/* Footer */
+#footer {
+
+}
+
+/* modal */
+.modal {
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0 , 0, 0.4);
+    align-items: center;
+    justify-content: center;
+    display: none;
+    overflow: auto;
+}
+.modal.open {
+    display: flex;
+}
+.modal-container {
+    background-color: #0d72ea ;
+    width: 400px;
+    min-height: 100px;
+    max-width: calc(100% - 32px);
+    position: relative;
+    animation: modalFadeIn ease 0.3s;
+    color: #fff;
+    border-radius: 24px;
+}
+.modal-body {
+    padding: 16px;
+}
+.modal-body .modal-header-text {
+    font-size: 20px;
+    font-weight: 600;
+}
+.modal-body-content {
+    font-size: 16px;
+}
+.modal-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.modal-body .modal-close,
+.modal-body .modal-login {
+    margin: 6px;
+}
+.modal-body .modal-close button {
+    background-color: #0d72ea;
+    border: none;
+    color: #fff;
+}
+.modal-body .modal-close button:hover {
+    transform: scale(1.1);
+}
+.modal-body .modal-login button {
+    border: none;
+    border-radius: 12px;
+    background-color: #fff;
+    font-weight: 600;
+}
+.modal-body .modal-login button:hover {
+    transform: scale(1.1);
+}
+.modal-body .modal-login button a {
+    color: #000;
+    padding: 8px 12px;
+    font-weight: 600;
+
+}
+
+.modal-label {
+    display: block;
+    font-size: 16px;
+    margin: 15px 0;
+}
+.modal-input {
+    width: 100%;
+    padding: 4px 8px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+}
+
+
+@keyframes modalFadeIn{
+    from {
+        opacity: 0;
+        transform: translateY(-140px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
