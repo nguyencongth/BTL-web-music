@@ -225,12 +225,12 @@
                     if(isset($_GET["search"]) && !empty($_GET["search"])){
                         $key = $_GET["search"];
                         $sql = "SELECT *
-                        FROM music 
-                        where Name_Music like '%$key%'
-                        or Name_Singer like '%$key%'";
+                        FROM music1, singer 
+                        where singer.ID_Singer = music1.ID_Singer and (Name_Music like '%$key%'
+                        or Name_Singer like '%$key%')";
                     }
                     else {
-                        $sql = "SELECT * From music";
+                        $sql = "SELECT * FROM music1, singer WHERE singer.ID_Singer = music1.ID_Singer";
                     }
                     $result = mysqli_query($conn, $sql);
 

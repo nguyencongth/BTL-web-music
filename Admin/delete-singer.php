@@ -14,8 +14,10 @@
     $conn = mysqli_connect("localhost", "root", "", "nhom8_web-music");
     
     $sqlGeID = "DELETE FROM singer WHERE ID_Singer = '$ID'";
+    $sqlGeID1 = "DELETE FROM music1 WHERE ID_Singer = '$ID'";
     $result = mysqli_query($conn, $sqlGeID);
-    if ($result == true) {
+    $result1 = mysqli_query($conn, $sqlGeID1);
+    if (($result == true)&& ($result1 == true)) {
         echo "<script>";
         echo "alert('Success delete');";
         echo "window.location.href='singer-manager.php'";

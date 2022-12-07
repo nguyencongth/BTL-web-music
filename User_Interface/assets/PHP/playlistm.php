@@ -138,7 +138,7 @@
             <div class="banner-content">
                 <table>
                     <?php if (isset($_POST["btn_tk"])) {
-                        $qr = mysqli_query($conn, "SELECT * from music where Name_Music LIKE '%$TK%' or Name_Singer LIKE '%$TK%'  ");
+                        $qr = mysqli_query($conn, "SELECT * from music1, singer where singer.ID_Singer = music1.ID_Singer and (Name_Music LIKE '%$TK%' or Name_Singer LIKE '%$TK%')  ");
                         if (mysqli_num_rows($qr) > 0) {
                             while ($row = mysqli_fetch_assoc($qr)) {
                     ?>
@@ -162,7 +162,7 @@
                 $MA = $_GET["MA"];
             }
             $re = mysqli_query($conn, "SELECT * FROM music_playlist where ID_PLAYLIST = '$MA'");
-            $qer = mysqli_query($conn, "SELECT * FROM music");
+            $qer = mysqli_query($conn, "SELECT * FROM music1, singer where singer.ID_Singer = music1.ID_Singer");
             if (isset($_GET["ID"])) {
                 $ID = $_GET["ID"];
                 $Name_Music = "";

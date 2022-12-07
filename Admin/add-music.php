@@ -164,7 +164,7 @@
                                 <td><input type="text" name="txtSong" id="txtSong" size="22"></td>
                             </tr>
                             <tr>
-                                <td>Singer Name:</td>
+                                <td>Singer ID:</td>
                                 <td><input type="text" name="txtSinger" id="txtSinger" size="22"></td>
                             </tr>
                             <tr>
@@ -191,13 +191,13 @@
     <?php
         if($_SERVER['REQUEST_METHOD'] = "POST " and ISSET($_POST['btnGhiDL'])) {
             $Name_Song = $_POST['txtSong'];
-            $Name_Singer = $_POST['txtSinger'];
+            $ID_Singer = $_POST['txtSinger'];
             $img = $_POST['txtIMG'];
             $src = $_POST['txtSRC'];
 
             $conn = mysqli_connect("localhost","root","","nhom8_web-music");
 
-            $sql = "INSERT INTO music VALUES('','$Name_Song', '$Name_Singer','$img','$src')";
+            $sql = "INSERT INTO music1 VALUES('','$Name_Song', '$ID_Singer','$img','$src')";
             $result = mysqli_query($conn, $sql);
             if($result == true){
                 echo "<script>";

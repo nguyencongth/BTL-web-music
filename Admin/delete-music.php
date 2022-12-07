@@ -13,7 +13,7 @@
     $ID = $_GET["ID_Music"];
     $conn = mysqli_connect("localhost", "root", "", "nhom8_web-music");
     
-    $sqlGeID = "DELETE FROM music WHERE ID_Music = '$ID'";
+    $sqlGeID = "DELETE FROM music1 WHERE ID_Music = '$ID'";
     $result = mysqli_query($conn, $sqlGeID);
     if ($result == true) {
         echo "<script>";

@@ -164,7 +164,7 @@
                         <p>
                             <?php
                             $conn = mysqli_connect('localhost', 'root', '', 'nhom8_web-music');
-                            $sql = "SELECT count(ID_Music) as total from music";
+                            $sql = "SELECT count(ID_Music) as total from music1";
                             $result = mysqli_query($conn, $sql);
                             $data = mysqli_fetch_assoc($result);
                             echo $data["total"];

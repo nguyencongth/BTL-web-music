@@ -158,7 +158,7 @@
                 <?php
                 $ID_Music = $_GET["ID_Music"];
                 $conn = mysqli_connect("localhost", "root", "", "nhom8_web-music");
-                $sql = "SELECT * From music Where ID_Music = '$ID_Music'";
+                $sql = "SELECT * From music1, singer Where singer.ID_Singer = music1.ID_Singer and ID_Music = '$ID_Music'";
                 $result = mysqli_query($conn, $sql);
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
@@ -200,7 +200,7 @@
 
             $conn = mysqli_connect("localhost","root","","nhom8_web-music");
 
-            $sql = "UPDATE music set Name_Music = '$Name_Music', Name_Singer = '$Name_Singer' Where ID_Music = '$ID_Music'";
+            $sql = "UPDATE music1, singer set Name_Music = '$Name_Music', Name_Singer = '$Name_Singer' Where singer.ID_Singer = music1.ID_Singer and ID_Music = '$ID_Music'";
             $result = mysqli_query($conn, $sql);
             if($result == true){
                 echo "<script>";

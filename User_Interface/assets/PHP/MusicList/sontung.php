@@ -178,7 +178,7 @@
     </div>
     <?php
     $conn = mysqli_connect('localhost', 'root', '', 'nhom8_web-music');
-    $result = mysqli_query($conn, "SELECT * from music where Name_Singer like 'Sơn Tùng M-TP' ");
+    $result = mysqli_query($conn, "SELECT * from music1, singer where singer.ID_Singer = music1.ID_Singer and Name_Singer like 'Sơn Tùng M-TP' ");
     $a=0;
      ?>
     <script>
