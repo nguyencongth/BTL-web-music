@@ -179,10 +179,9 @@
     <?php
     $conn = mysqli_connect('localhost', 'root', '', 'nhom8_web-music');
     $result = mysqli_query($conn, "SELECT * from music1, singer where singer.ID_Singer = music1.ID_Singer and Name_Singer like 'Sơn Tùng M-TP' ");
-    $a=0;
-     ?>
+    $a = 0;
+    ?>
     <script>
-        
         const $ = document.querySelector.bind(document)
         const $$ = document.querySelectorAll.bind(document)
 
@@ -205,12 +204,19 @@
             isRandom: false,
             isRepeat: false,
             songs: [
-                <?php while($row = mysqli_fetch_assoc($result)){ $a++; echo "{" ?>
+                <?php while ($row = mysqli_fetch_assoc($result)) {
+                    $a++;
+                    echo "{" ?>
                     nameSong: '<?php echo $row["Name_Music"] ?>',
                     singer: '<?php echo $row["Name_Singer"] ?>',
                     path: '<?php echo "../../Music/SonTung/" . $row["SRC_Music"] ?>',
                     img: '<?php echo "../../img/" . $row["IMG"] ?>'
-                <?php if($a == mysqli_num_rows($result)){ echo "}";} else { echo "},";} } ?>
+                <?php if ($a == mysqli_num_rows($result)) {
+                        echo "}";
+                    } else {
+                        echo "},";
+                    }
+                } ?>
             ],
             render: function() {
                 const htmls = this.songs.map((song, index) => {
