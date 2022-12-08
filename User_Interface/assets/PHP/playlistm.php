@@ -23,6 +23,7 @@
             height: 36px;
             border-radius: 8px;
         }
+
         .btnAdd:hover {
             background-color: #ccc;
         }
@@ -36,9 +37,9 @@
 <body>
     <?php
     session_start();
+    $conn = mysqli_connect('localhost', 'root', '', 'nhom8_web-music');
     $a = 0;
     $ID = $_SESSION["ID"];
-    $conn = mysqli_connect('localhost', 'root', '', 'nhom8_web-music');
     $result = mysqli_query($conn, "SELECT * from pay");
     while ($row = mysqli_fetch_assoc($result)) {
         if ($ID == $row["ID_THONGTIN"]) {
@@ -84,6 +85,17 @@
                     </ul>
                 </div>
             </div>
+
+           <!-- dùng để xóa bài hát trong playlist -->
+            <?php
+            if (isset($_GET["pla"])) {
+                $pla = $_GET["pla"];
+                mysqli_query($conn, "DELETE FROM music_playlist where ID_MUSICPLAYLIST = '$pla' ");
+            }
+            ?>
+
+
+
             <form method="post">
                 <div class="search">
                     <input type="text" name="search" id="" class="form_search" placeholder="Search here....." size="50">
@@ -121,10 +133,10 @@
             </div>
         </div>
 
+         <!-- dùng để tìm kiếm bài nhạc add vào playlist -->
         <?php
-        $conn = mysqli_connect('localhost', 'root', '', 'nhom8_web-music');
-        $w = 0;
         $TK = "";
+        $w = 0;
         $error = array();
         if (isset($_GET["MA"])) {
             $_SESSION["MA"] = $_GET["MA"];
@@ -138,32 +150,41 @@
             <div class="banner-content">
                 <table>
                     <?php if (isset($_POST["btn_tk"])) {
-                        $qr = mysqli_query($conn, "SELECT * from music1, singer where singer.ID_Singer = music1.ID_Singer and (Name_Music LIKE '%$TK%' or Name_Singer LIKE '%$TK%')  ");
+                        $qr = mysqli_query($conn, "SELECT * from music1, singer where singer.ID_Singer = music1.ID_Singer and (Name_Music LIKE '%$TK%' or Name_Singer LIKE '%$TK%')");
+                        $qr1 = mysqli_query($conn, "SELECT * from music1, singer where singer.ID_Singer = music1.ID_Singer");
                         if (mysqli_num_rows($qr) > 0) {
-                            while ($row = mysqli_fetch_assoc($qr)) {
+                            if (mysqli_num_rows($qr) < mysqli_num_rows($qr1)) {
+                                while ($row = mysqli_fetch_assoc($qr)) {
                     ?>
-                                <tr>
-                                    <td><?php echo $row["Name_Music"]; ?></td>
-                                    <td><?php echo $row["Name_Singer"]; ?></td>
-                                    <td><button class="btnAdd" type="submit" name="sub"><a href="./playlistm.php?MA=<?php echo  $_SESSION["MA"]; ?>&ID=<?php echo $row["ID_Music"]; ?>">Add</a></button></td>
-                                </tr>
+                                    <tr>
+                                        <td><?php echo $row["Name_Music"]; ?></td>
+                                        <td><?php echo $row["Name_Singer"]; ?></td>
+                                        <td><button class="btnAdd" type="submit" name="sub"><a href="./playlistm.php?MA=<?php echo  $_SESSION["MA"]; ?>&ID=<?php echo $row["ID_Music"]; ?>">Add</a></button></td>
+                                    </tr>
                     <?php      }
+                            } else {
+                                echo "vui lòng nhập thông tin tìm kiếm";
+                            }
                         }
                         if (mysqli_num_rows($qr) == 0) {
                             echo "không có kết quả tìm kiếm";
                         }
-                    } ?>
+                    }
+                    if (isset($error["eBAIHAT"])) {
+                        echo $error["eBAIHAT"];
+                    }
+                    ?>
                 </table>
             </div>
 
-
+           <!-- khi bấm vào thêm thì sẽ add thông tin vào danh sách playlist -->
             <?php
             if (isset($_GET["MA"])) {
                 $MA = $_GET["MA"];
             }
-            $re = mysqli_query($conn, "SELECT * FROM music_playlist where ID_PLAYLIST = '$MA'");
-            $qer = mysqli_query($conn, "SELECT * FROM music1, singer where singer.ID_Singer = music1.ID_Singer");
             if (isset($_GET["ID"])) {
+                $re = mysqli_query($conn, "SELECT * FROM music_playlist where ID_PLAYLIST = '$MA'");
+                $qer = mysqli_query($conn, "SELECT * FROM music1, singer where singer.ID_Singer = music1.ID_Singer");
                 $ID = $_GET["ID"];
                 $Name_Music = "";
                 $Name_Singer = "";
@@ -186,10 +207,12 @@
                     mysqli_query($conn, "INSERT INTO music_playlist value('','$Name_Music','$Name_Singer','$IMG','$SRC_Music','$MA')");
                 }
                 if (!empty($Name_Music) && !empty($Name_Singer)  && $w == 1) {
-                    $error["eBAIHAT"] = "bài hát đã có trong playlist";
+                   echo "bài hát này đã có trong playlist của bạn";
                 }
             }
             ?>
+
+           
         </div>
 
         <div class="musicList">
@@ -221,8 +244,8 @@
                         <img class="playerBar_item-img--thumb" alt="">
                     </div>
                     <div class="playerBar_item-name">
-                        <div class="playerBar_item-name--nameSong">CHẠY NGAY ĐI</div>
-                        <div class="playerBar_item-name--nameArtist">Sơn Tùng M-TP</div>
+                        <div class="playerBar_item-name--nameSong">None</div>
+                        <div class="playerBar_item-name--nameArtist">None</div>
                     </div>
                 </div>
                 <div>
@@ -255,6 +278,7 @@
     <?php
     $MA = $_SESSION["MA"];
     $result = mysqli_query($conn, "SELECT * from music_playlist where ID_PLAYLIST = '$MA' ");
+    $er = array();
     $a = 0;
     ?>
 
@@ -284,8 +308,10 @@
                     nameSong: '<?php echo  $row["Name_Music"]; ?>',
                     singer: '<?php echo $row["Name_Singer"]; ?>',
                     path: '<?php echo "../Music/" . $row["SRC_Music"]; ?>',
-                    img: '<?php echo "../img/" . $row["IMG"]; ?>'
-                <?php if ($a == mysqli_num_rows($result)) {
+                    img: '<?php echo "../img/" . $row["IMG"]; ?>',
+                    pla: '<?php echo $row["ID_MUSICPLAYLIST"]; ?>'
+                <?php
+                        if ($a == mysqli_num_rows($result)) {
                             echo "}";
                         } else {
                             echo "},";
@@ -305,7 +331,9 @@
                             <p>${song.singer}</p>
                         </div>
                     </div>
-                    
+                    <div style="margin-left: auto;">
+                    <a href="playlistm.php?pla=${song.pla}"><button class="btnAdd">xóa</button></a>
+                    </div>
                 </div>
             `
                 })
@@ -489,6 +517,8 @@
         }
         app.start();
     </script>
+
+
     <script src="../common/Jquery/jquery-3.6.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>

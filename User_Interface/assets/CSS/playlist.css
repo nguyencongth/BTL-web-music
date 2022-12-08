@@ -173,13 +173,15 @@ table {
     text-align: center;
 }
 .add,
-.del {
+.del,
+.up {
     border-radius: 8px;
     width: 70px;
     height: 36px;
 }
 .add:hover,
-.del:hover {
+.del:hover,
+.up:hover {
     background-color: #ccc;
 }
 /* modal */

@@ -17,6 +17,15 @@
 <body>
     <?php
     session_start();
+    $a = 0;
+    $ID = $_SESSION["ID"];
+    $conn = mysqli_connect('localhost', 'root', '', 'nhom8_web-music');
+    $result = mysqli_query($conn, "SELECT * from pay");
+    while ($row = mysqli_fetch_assoc($result)) {
+        if ($ID == $row["ID_THONGTIN"]) {
+            $a++;
+        }
+    }
     ?>
     <div id="main">
         <div id="header">
@@ -36,7 +45,11 @@
                         <?php
                         if (isset($_SESSION["USER"])) {
                         ?>
-                            <li><a href="../PHP/playlist.php">Playlist</a></li>
+                            <?php if ($a == 1) { ?>
+                            <li><a href="../User_Interface/assets/PHP/playlist.php">Playlist</a></li>
+                            <?php } else { ?>
+                                <li><a href="">Playlist</a></li>
+                            <?php } ?>
                         <?php } ?>
 
                         <li><a class="active" href="../PHP/premium.php">Premium</a></li>

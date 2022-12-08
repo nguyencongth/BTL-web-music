@@ -293,3 +293,9 @@ input[type="range" i] {
     height: 25px;
     margin-top: 16px;
 }
+
+.tex
+{   border: none;
+    border-radius: 10px;
+    text-align: center;
+}

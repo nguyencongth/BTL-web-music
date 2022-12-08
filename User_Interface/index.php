@@ -44,8 +44,11 @@
 
                         <?php
                         if (isset($_SESSION["USER"])) {
-                        ?>
+                        ?>  <?php if ($a == 1) { ?>
                             <li><a href="../User_Interface/assets/PHP/playlist.php">Playlist</a></li>
+                            <?php } else { ?>
+                                <li><a href="#" class="js-playlist_pre">Playlist</a></li>
+                            <?php } ?>
                         <?php } ?>
 
                         <?php
@@ -162,6 +165,67 @@
                 </a>
             </div>
 
+            <div class="singer-list">
+                <a href="./assets/PHP/MusicList/mono.php">
+                    <div class="singer-item">
+                        <div class="singer__img">
+                            <img src="./assets/img/mono.jpg" alt="" class="singer-img">
+                            <span class="play"><i class="fa-solid fa-circle-play"></i></span>
+                        </div>
+                        <div class="singer-content">
+                            <h3>Mono</h3>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="./assets/PHP/MusicList/sontung.php">
+                    <div class="singer-item">
+                        <div class="singer__img">
+                            <img src="./assets/img/sontung.jpg" alt="" class="singer-img">
+                            <span class="play"><i class="fa-solid fa-circle-play"></i></span>
+                        </div>
+                        <div class="singer-content">
+                            <h3>Sơn Tùng</h3>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="./assets/PHP/MusicList/quanap.php">
+                    <div class="singer-item">
+                        <div class="singer__img">
+                            <img src="./assets/img/quan_ap.jpg" alt="" class="singer-img">
+                            <span class="play"><i class="fa-solid fa-circle-play"></i></span>
+                        </div>
+                        <div class="singer-content">
+                            <h3>Quân AP</h3>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="./assets/PHP/MusicList/bichphuong.php">
+                    <div class="singer-item">
+                        <div class="singer__img">
+                            <img src="./assets/img/bichphuong.jpg" alt="" class="singer-img">
+                            <span class="play"><i class="fa-solid fa-circle-play"></i></span>
+                        </div>
+                        <div class="singer-content">
+                            <h3>Bích Phương</h3>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="./assets/PHP/MusicList/hoaminzy.php">
+                    <div class="singer-item">
+                        <div class="singer__img">
+                            <img src="./assets/img/hoaminzy.jpg" alt="" class="singer-img">
+                            <span class="play"><i class="fa-solid fa-circle-play"></i></span>
+                        </div>
+                        <div class="singer-content">
+                            <h3>Hòa Minzy</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
         </div>
 
@@ -180,6 +244,20 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+    <div class="modal js-modal5">
+        <div class="modal-container js-modal-container5">
+            <div class="modal-body">
+                <div class="modal-header-text">
+                    <p>Tạo danh sách phát</p>
+                </div>
+                <p class="modal-body-content">Đăng ký premium để tạo playlist</p>
+                <div class="modal-end">
+                    <div class="modal-close js-modal-close5"><button>Để sau</button></div>
+                    <div class="modal-login"><button><a href="./assets/PHP/premium.php">Đăng ký</a></button></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -290,7 +368,7 @@
 
                     <div class="modal-end" style="margin-top: 15px;">
                         <div class="modal-close js-modal-close2"><button>Để sau</button></div>
-                        <div class="modal-login"><button type="submit" style="width: 160px; height:35px;" name="btn">Đặt mật khẩu mới</button></div>
+                        <div class="modal-login"><a href="./index.php"><button type="submit" style="width: 160px; height:35px;" name="btn">Đặt mật khẩu mới</button></a></div>
                     </div>
                 </div>
             </form>
@@ -383,6 +461,7 @@
         while ($r = mysqli_fetch_array($sql2)) {
             $_SESSION["USER"] = $r["USER"];
         }
+        header('location: http://localhost:8080/PHP/Nhom8_Web_Music_demo/User_interface/index.php');
     }
     ?>
 
@@ -393,24 +472,28 @@
         const changePassWord_Btns = document.querySelectorAll('.js-changePassWord')
         const Account_Btns = document.querySelectorAll('.js-Account')
         const Edit_Btns = document.querySelectorAll('.js-edit')
+        const playlist_pre_Btns = document.querySelectorAll('.js-playlist_pre')
 
         const modal = document.querySelector('.js-modal')
         const modal1 = document.querySelector('.js-modal1')
         const modal2 = document.querySelector('.js-modal2')
         const modal3 = document.querySelector('.js-modal3')
         const modal4 = document.querySelector('.js-modal4')
+        const modal5 = document.querySelector('.js-modal5')
 
         const modalClose = document.querySelector('.js-modal-close')
         const modalClose1 = document.querySelector('.js-modal-close1')
         const modalClose2 = document.querySelector('.js-modal-close2')
         const modalClose3 = document.querySelector('.js-modal-close3')
         const modalClose4 = document.querySelector('.js-modal-close4')
+        const modalClose5 = document.querySelector('.js-modal-close5')
 
         const modalContainer = document.querySelector('.js-modal-container')
         const modalContainer1 = document.querySelector('.js-modal-container1')
         const modalContainer2 = document.querySelector('.js-modal-container2')
         const modalContainer3 = document.querySelector('.js-modal-container3')
         const modalContainer4 = document.querySelector('.js-modal-container4')
+        const modalContainer5 = document.querySelector('.js-modal-container5')
 
         function show() {
             modal.classList.add('open')
@@ -430,6 +513,9 @@
 
         function show4() {
             modal4.classList.add('open')
+        }
+        function show5() {
+            modal5.classList.add('open')
         }
 
 
@@ -452,6 +538,9 @@
         function hide4() {
             modal4.classList.remove('open')
         }
+        function hide5() {
+            modal5.classList.remove('open')
+        }
 
 
         for (const create_playlist_Btn of create_playlist_Btns) {
@@ -469,18 +558,23 @@
         for (const Edit_Btn of Edit_Btns) {
             Edit_Btn.addEventListener('click', show4)
         }
+        for (const playlist_pre_Btn  of playlist_pre_Btns) {
+            playlist_pre_Btn.addEventListener('click', show5)
+        }
 
         modalClose.addEventListener('click', hide)
         modalClose1.addEventListener('click', hide1)
         modalClose2.addEventListener('click', hide2)
         modalClose3.addEventListener('click', hide3)
         modalClose4.addEventListener('click', hide4)
+        modalClose5.addEventListener('click', hide5)
 
         modal.addEventListener('click', hide)
         modal1.addEventListener('click', hide1)
         modal2.addEventListener('click', hide2)
         modal3.addEventListener('click', hide3)
         modal4.addEventListener('click', hide4)
+        modal5.addEventListener('click', hide5)
 
         modalContainer.addEventListener('click', function(event) {
             event.stopPropagation()
@@ -495,6 +589,9 @@
             event.stopPropagation()
         })
         modalContainer4.addEventListener('click', function(event) {
+            event.stopPropagation()
+        })
+        modalContainer5.addEventListener('click', function(event) {
             event.stopPropagation()
         })
     </script>

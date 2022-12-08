@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="../CSS/playlist.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="../../assets/CSS/base.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./assets/CSS/homepage.css?v=<?php echo time(); ?>">
     <link rel="icon" type="image/x-icon" href="../img/logo.png">
     <title>playlist</title>
 </head>
@@ -171,7 +172,7 @@
                 </div>
                 <?php
                 $PLAYLIST = "";
-                $DESCRIPTION = "";
+                $DESCRIPTIONS = "";
                 $ID_THONGTIN = "";
                 $error = array();
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -180,15 +181,17 @@
                     } else {
                         $PLAYLIST = $_POST["PLAYLIST"];
                     }
-                    if (isset($_POST["DESCRIPTION"])) {
-                        $DESCRIPTION = $_POST["DESCRIPTION"];
+                    if (isset($_POST["DESCRIPTIONS"])) {
+                        $DESCRIPTIONS = $_POST["DESCRIPTIONS"];
                     }
                 }
                 if (isset($_POST["btn"])) {
                     $ID_THONGTIN = $_SESSION["ID"];
-                    mysqli_query($conn, "INSERT INTO playlist value ('','$PLAYLIST','$DESCRIPTION','$ID_THONGTIN')");
+                    mysqli_query($conn, "INSERT INTO playlist value ('','$PLAYLIST','$DESCRIPTIONS','$ID_THONGTIN')");
                 }
                 ?>
+
+
                 <form method="POST">
                     <div class="modal-body">
                         <input accept="image/.jpg, image/.jpeg, image/.png" type="file" name="" id="choose-file" class="choose-file">
@@ -202,11 +205,12 @@
                         </div>
 
                         <div class="input-name-playlist"><input type="text" name="PLAYLIST" id="" placeholder="Add a name" class="enter-input"></div>
-                        <div class="desc-playlist"><textarea name="DESCRIPTION" id="" cols="30" rows="10" placeholder="Add an optional description" class="enter-text"></textarea></div>
+                        <div class="desc-playlist"><textarea name="DESCRIPTIONS" id="" cols="30" rows="10" placeholder="Add an optional description" class="enter-text"></textarea></div>
                         <div class="btn"><button type="submit" name="btn" class="btn-save">Lưu</button></div>
 
                     </div>
                 </form>
+
             </div>
         </div>
         <div id="wp-products">
@@ -215,11 +219,12 @@
             </div>
             <h2>Danh sách playlist của bạn</h2>
 
+
             <table>
                 <thead>
                     <th>PlayList Name</th>
                     <th>Description</th>
-                    <th colspan="2">Option</th>
+                    <th colspan="4">Option</th>
                 </thead>
                 <?php
                 $ID_THONGTIN = $_SESSION["ID"];
@@ -227,18 +232,23 @@
                 if (mysqli_num_rows($re) > 0) {
                     while ($row = mysqli_fetch_assoc($re)) { ?>
                         <tr>
-                            <td><?php echo $row["PLAYLIST"]; ?></td>
-                            <td><?php echo $row["DESCRIPTION"]; ?></td>
+                            <form action="updateplaylist.php" method="get">
+                                <td><input type="text" name="PLAY" class="tex" value="<?php echo $row["PLAYLIST"]; ?>"></td>
+                                <td><input type="text" name="DES" class="tex" value="<?php echo $row["DESCRIPTIONS"]; ?>"></td>
+                                <input type="hidden" name="ID1" value="<?php echo $row["ID_PLAYLIST"]; ?>">
+                                <td><button type="submit" class="up" name="up">Update</button></td>
+                            </form>
                             <td> <a href="./playlistm.php?MA=<?php echo $row["ID_PLAYLIST"]; ?>"><button class="add">Add</button></a></td>
                             <td> <a href="./xoaplaylist.php?MA=<?php echo $row["ID_PLAYLIST"]; ?>"><button class="del">Delete</button></a></td>
                         </tr>
                 <?php }
                 } ?>
             </table>
+
         </div>
 
+        <!-- dùng để sửa thông tin playlist -->
 
-        
 
         <script>
             const create_playlist_Btns = document.querySelectorAll('.js-create_playlist')
@@ -259,14 +269,19 @@
             }
 
             modalClose.addEventListener('click', hide)
-           
+
             modal.addEventListener('click', hide)
-            
+
             modalContainer.addEventListener('click', function(event) {
                 event.stopPropagation()
             })
-            
         </script>
+
+        <!-- -->
+
+
+
+        <!-- -->
         <script src="../common/Jquery/jquery-3.6.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
